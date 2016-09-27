@@ -1,0 +1,13 @@
+[Unit]
+Description=CouchPotato application instance
+After=network.target
+
+[Service]
+User=<%= node['couchpotato']['user'] %>
+Group=<%= node['couchpotato']['user'] %>
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/bin/python <%= node['couchpotato']['directory']['install_dir'] %>/CouchPotato.py --quiet --daemon --config_file <%= node['couchpotato']['config_file'] %> --data_dir <%= node['couchpotato']['directory']['data_dir'] %> --pid_file <%= node['couchpotato']['pid_file'] %>
+
+[Install]
+WantedBy=multi-user.target
